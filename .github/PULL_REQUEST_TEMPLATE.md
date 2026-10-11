@@ -15,6 +15,7 @@ Closes #<!-- issue number, e.g. Closes #42 -->
 ## Checklist
 
 - [ ] This PR is linked to an issue (`Closes #...` above)
+- [ ] `npm test` passes
 - [ ] I tested my change locally (see [Test your change](https://github.com/KEX-03/taskflow/blob/main/CONTRIBUTING.md#4-test-your-change))
 - [ ] I added screenshots for UI changes
 - [ ] I updated the docs (README, `.env.example`, Postman collection) if needed
