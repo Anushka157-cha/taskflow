@@ -1,8 +1,19 @@
+const mongoose = require("mongoose");
 const Task = require("../models/Task");
 const { PRIORITIES, STATUSES } = Task;
 const { getQueryString, escapeRegex, parsePositiveInt } = require("../utils/query");
 
 const MAX_SEARCH_LENGTH = 100;
+
+// Reusable helper to validate task IDs
+const isInvalidTaskId = (id) => !mongoose.isValidObjectId(id);
+
+// Reusable 404 response for missing tasks
+const sendTaskNotFound = (res) =>
+  res.status(404).json({
+    success: false,
+    message: "Task not found.",
+  });
 
 // ── POST /api/v1/tasks ───────────────────────
 const createTask = async (req, res) => {
@@ -62,18 +73,30 @@ const getTasks = async (req, res) => {
 
 // ── GET /api/v1/tasks/:id ────────────────────
 const getTask = async (req, res) => {
-  const task = await Task.findOne({ _id: req.params.id, owner: req.user._id });
+  const { id } = req.params;
+
+  if (isInvalidTaskId(id)) {
+    return sendTaskNotFound(res);
+  }
+  
+  const task = await Task.findOne({ _id: id, owner: req.user._id });
   if (!task) {
-    return res.status(404).json({ success: false, message: "Task not found." });
+    return sendTaskNotFound(res);
   }
   res.json({ success: true, task });
 };
 
 // ── PUT /api/v1/tasks/:id ────────────────────
 const updateTask = async (req, res) => {
-  const task = await Task.findOne({ _id: req.params.id, owner: req.user._id });
+  const { id } = req.params;
+
+  if (isInvalidTaskId(id)) {
+    return sendTaskNotFound(res);
+  }
+
+  const task = await Task.findOne({ _id: id, owner: req.user._id });
   if (!task) {
-    return res.status(404).json({ success: false, message: "Task not found." });
+    return sendTaskNotFound(res);
   }
 
   const { title, description, priority, status } = req.body;
@@ -102,9 +125,15 @@ const updateTask = async (req, res) => {
 
 // ── DELETE /api/v1/tasks/:id ─────────────────
 const deleteTask = async (req, res) => {
-  const task = await Task.findOne({ _id: req.params.id, owner: req.user._id });
+  const { id } = req.params;
+
+  if (isInvalidTaskId(id)) {
+    return sendTaskNotFound(res);
+  }
+
+  const task = await Task.findOne({ _id: id, owner: req.user._id });
   if (!task) {
-    return res.status(404).json({ success: false, message: "Task not found." });
+    return sendTaskNotFound(res);
   }
   await task.deleteOne();
   res.json({ success: true, message: "Task deleted." });
