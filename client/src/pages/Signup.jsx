@@ -74,9 +74,7 @@ const Signup = () => {
             {/* Name */}
             <div>
               <label htmlFor="signup-name" className="block text-sm font-medium text-slate-300 mb-1.5">Full Name</label>
-              <input
-                id="signup-name"
-                type="text" name="name" value={form.name} onChange={handleChange} placeholder="John Doe"
+              <input id="signup-name" type="text" name="name" value={form.name} onChange={handleChange} placeholder="John Doe"
                 className={`w-full px-4 py-2.5 text-sm rounded-lg transition-colors ${errors.name ? "border-red-500 ring-1 ring-red-500" : ""}`} />
               {errors.name && <p className="text-red-400 text-xs mt-1.5">{errors.name}</p>}
             </div>
@@ -84,19 +82,14 @@ const Signup = () => {
             {/* Email */}
             <div>
               <label htmlFor="signup-email" className="block text-sm font-medium text-slate-300 mb-1.5">Email</label>
-              <input
-                id="signup-email"
-                type="email" name="email" value={form.email} onChange={handleChange} placeholder="you@example.com"
+              <input id="signup-email" type="email" name="email" value={form.email} onChange={handleChange} placeholder="you@example.com"
                 className={`w-full px-4 py-2.5 text-sm rounded-lg transition-colors ${errors.email ? "border-red-500 ring-1 ring-red-500" : ""}`} />
               {errors.email && <p className="text-red-400 text-xs mt-1.5">{errors.email}</p>}
             </div>
 
             {/* Password */}
             <div>
-              <label
-              htmlFor="signup-password"
-              className="block text-sm font-medium text-slate-300 mb-1.5">Password</label>
-
+              <label htmlFor="signup-password" className="block text-sm font-medium text-slate-300 mb-1.5">Password</label>
               <PasswordInput
                 id="signup-password"
                 name="password"
@@ -106,7 +99,6 @@ const Signup = () => {
                 autoComplete="new-password"
                 hasError={!!errors.password}
               />
-
               {errors.password && <p className="text-red-400 text-xs mt-1.5">{errors.password}</p>}
 
               {/* Strength bar */}
@@ -130,18 +122,17 @@ const Signup = () => {
 
             {/* Confirm Password */}
             <div>
-              <label
-              htmlFor="signup-confirm-password" className="block text-sm font-medium text-slate-300 mb-1.5">Confirm Password</label>
+              <label htmlFor="signup-confirm-password" className="block text-sm font-medium text-slate-300 mb-1.5">Confirm Password</label>
               <PasswordInput
-              id="signup-confirm-password"
-              name="confirmPassword"
-              value={form.confirmPassword}
-              onChange={handleChange}
-              placeholder="••••••••"
-              autoComplete="new-password"
-              hasError={!!errors.confirmPassword}
-            />
-            {errors.confirmPassword && <p className="text-red-400 text-xs mt-1.5">{errors.confirmPassword}</p>}
+                id="signup-confirm-password"
+                name="confirmPassword"
+                value={form.confirmPassword}
+                onChange={handleChange}
+                placeholder="••••••••"
+                autoComplete="new-password"
+                hasError={!!errors.confirmPassword}
+              />
+              {errors.confirmPassword && <p className="text-red-400 text-xs mt-1.5">{errors.confirmPassword}</p>}
             </div>
 
             {/* Submit */}
