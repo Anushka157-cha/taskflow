@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext.jsx";
 import { validateSignup, passwordRules } from "../utils/validation.js";
+import PasswordInput from "../components/Shared/PasswordInput.jsx";
 
 const Signup = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
@@ -88,10 +89,24 @@ const Signup = () => {
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">Password</label>
-              <input type="password" name="password" value={form.password} onChange={handleChange} placeholder="••••••••"
-                className={`w-full px-4 py-2.5 text-sm rounded-lg transition-colors ${errors.password ? "border-red-500 ring-1 ring-red-500" : ""}`} />
-              {errors.password && <p className="text-red-400 text-xs mt-1.5">{errors.password}</p>}
+              <label
+  htmlFor="signup-password"
+  className="block text-sm font-medium text-slate-300 mb-1.5"
+>
+  Password
+</label>
+    <PasswordInput
+      id="signup-password"
+      name="password"
+      value={form.password}
+      onChange={handleChange}
+      placeholder="••••••••"
+      autoComplete="new-password"
+      hasError={!!errors.password}
+/>
+      {errors.password && (
+          <p className="text-red-400 text-xs mt-1.5">{errors.password}</p>
+              )}
 
               {/* Strength bar */}
               {form.password && (
@@ -114,10 +129,26 @@ const Signup = () => {
 
             {/* Confirm Password */}
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">Confirm Password</label>
-              <input type="password" name="confirmPassword" value={form.confirmPassword} onChange={handleChange} placeholder="••••••••"
-                className={`w-full px-4 py-2.5 text-sm rounded-lg transition-colors ${errors.confirmPassword ? "border-red-500 ring-1 ring-red-500" : ""}`} />
-              {errors.confirmPassword && <p className="text-red-400 text-xs mt-1.5">{errors.confirmPassword}</p>}
+              <label
+  htmlFor="signup-confirm-password"
+  className="block text-sm font-medium text-slate-300 mb-1.5"
+>
+  Confirm Password
+</label>
+      <PasswordInput
+          id="signup-confirm-password"
+          name="confirmPassword"
+          value={form.confirmPassword}
+          onChange={handleChange}
+          placeholder="••••••••"
+          autoComplete="new-password"
+          hasError={!!errors.confirmPassword}
+        />
+        {errors.confirmPassword && (
+        <p className="text-red-400 text-xs mt-1.5">
+        {errors.confirmPassword}
+        </p>
+)}
             </div>
 
             {/* Submit */}
