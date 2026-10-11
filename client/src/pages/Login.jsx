@@ -72,8 +72,11 @@ const Login = () => {
           <form onSubmit={handleSubmit} noValidate className="space-y-5">
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">Email</label>
+              <label
+                htmlFor="login-email"
+                className="block text-sm font-medium text-slate-300 mb-1.5">Email</label>
               <input
+                id="login-email"
                 type="email"
                 name="email"
                 value={form.email}
@@ -86,15 +89,20 @@ const Login = () => {
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">Password</label>
+              <label htmlFor="login-password" className="block text-sm font-medium text-slate-300 mb-1.5">Password</label>
               <PasswordInput
+                id="login-password"
                 name="password"
                 value={form.password}
                 onChange={handleChange}
                 placeholder="••••••••"
                 hasError={!!errors.password}
               />
-              {errors.password && <p className="text-red-400 text-xs mt-1.5">{errors.password}</p>}
+              {errors.password && (
+                <p className="text-red-400 text-xs mt-1.5">
+                  {errors.password}
+                </p>
+              )}
             </div>
 
             {/* Submit */}
