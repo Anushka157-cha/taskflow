@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Accessibility: every form label is now linked to its field (clicking a label focuses it, and screen readers announce it), and the icon-only buttons (Edit, Delete, dialog Close, sidebar Collapse/Expand) have descriptive names ([#23](https://github.com/KEX-03/taskflow/pull/23)). Thanks to [@manish-panwarr](https://github.com/manish-panwarr)!
+- Requesting, updating or deleting a task with an invalid id (like `/tasks/abc`) now returns 404 "Task not found." instead of a 500 error that exposed an internal database message ([#27](https://github.com/KEX-03/taskflow/pull/27)). Thanks to [@s-sivaselvan](https://github.com/s-sivaselvan)!
 
 ## [1.0.0] - 2026-10-09
 

@@ -78,7 +78,7 @@ const getTask = async (req, res) => {
   if (isInvalidTaskId(id)) {
     return sendTaskNotFound(res);
   }
-  
+
   const task = await Task.findOne({ _id: id, owner: req.user._id });
   if (!task) {
     return sendTaskNotFound(res);
