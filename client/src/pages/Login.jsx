@@ -91,7 +91,7 @@ const Login = () => {
                 name="password"
                 value={form.password}
                 onChange={handleChange}
-                placeholder="Enter password"
+                placeholder="••••••••"
                 hasError={!!errors.password}
               />
               {errors.password && <p className="text-red-400 text-xs mt-1.5">{errors.password}</p>}
