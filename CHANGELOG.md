@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Show/hide password toggle on the Login and Signup pages, with labels linked to the password fields ([#22](https://github.com/KEX-03/taskflow/pull/22)). Thanks to [@Mathi23ok](https://github.com/Mathi23ok)!
 - A friendly empty state on the Tasks page for users who have no tasks yet, with a "Create your first task" button ([#25](https://github.com/KEX-03/taskflow/pull/25)). Thanks to [@GauriMalge](https://github.com/GauriMalge)!
 - Automated tests for the server's query helpers, using Node's built-in test runner (no new dependencies). Run them with `npm test` from the repository root ([#26](https://github.com/KEX-03/taskflow/pull/26)). Thanks to [@Venom-2006](https://github.com/Venom-2006)!
+- A browser tab icon (favicon) and home-screen icon, matching the TaskFlow logo in the sidebar.
 
 ### Fixed
 
