@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Show/hide password toggle on the Login and Signup pages, with labels linked to the password fields ([#22](https://github.com/KEX-03/taskflow/pull/22)). Thanks to [@Mathi23ok](https://github.com/Mathi23ok)!
+- A friendly empty state on the Tasks page for users who have no tasks yet, with a "Create your first task" button ([#25](https://github.com/KEX-03/taskflow/pull/25)). Thanks to [@GauriMalge](https://github.com/GauriMalge)!
+
 ## [1.0.0] - 2026-10-09
 
 First public release. 🎉
