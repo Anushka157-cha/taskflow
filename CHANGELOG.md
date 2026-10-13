@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - A friendly empty state on the Tasks page for users who have no tasks yet, with a "Create your first task" button ([#25](https://github.com/KEX-03/taskflow/pull/25)). Thanks to [@GauriMalge](https://github.com/GauriMalge)!
 - Automated tests for the server's query helpers, using Node's built-in test runner (no new dependencies). Run them with `npm test` from the repository root ([#26](https://github.com/KEX-03/taskflow/pull/26)). Thanks to [@Venom-2006](https://github.com/Venom-2006)!
 - A browser tab icon (favicon) and home-screen icon, matching the TaskFlow logo in the sidebar.
+- The Dashboard greets users with "Good morning", "Good afternoon" or "Good evening" based on their local time, instead of always "Good morning" ([#29](https://github.com/KEX-03/taskflow/pull/29)). Thanks to [@s-sivaselvan](https://github.com/s-sivaselvan)!
 
 ### Fixed
 
