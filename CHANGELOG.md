@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `npm run seed` creates a demo user (`demo@example.com`) with 8 sample tasks for local development. It refuses to run against a non-local database unless `--allow-remote` is given ([#31](https://github.com/KEX-03/taskflow/pull/31)). Thanks to [@CreatorguyS](https://github.com/CreatorguyS)!
 - An API reference ([`docs/API.md`](docs/API.md)) with example requests and real responses for every endpoint ([#32](https://github.com/KEX-03/taskflow/pull/32)). Thanks to [@CreatorguyS](https://github.com/CreatorguyS)!
 
+### Changed
+
+- The README's main image is now an animated demo of the app.
+- The contributing guide and pull request template ask contributors to run `npm test` before opening a pull request.
+
 ### Fixed
 
 - Accessibility: every form label is now linked to its field (clicking a label focuses it, and screen readers announce it), and the icon-only buttons (Edit, Delete, dialog Close, sidebar Collapse/Expand) have descriptive names ([#23](https://github.com/KEX-03/taskflow/pull/23)). Thanks to [@manish-panwarr](https://github.com/manish-panwarr)!
