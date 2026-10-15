@@ -159,6 +159,8 @@ All endpoints start with `/api/v1`. Endpoints marked 🔒 need a login token in 
 | `DELETE` | `/tasks/:id` | 🔒 | Delete a task |
 | `GET` | `/health` | | Check that the API is running |
 
+Login allows 10 failed attempts and signup 10 requests per 15 minutes per IP address. After that, they return `429 Too Many Requests`.
+
 **Try it in Postman:** import [`postman_collection.json`](postman_collection.json). After you run *Signup* or *Login*, the token is saved and used by every other request automatically.
 
 ## Deployment
