@@ -14,11 +14,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Automated tests for the server's query helpers, using Node's built-in test runner (no new dependencies). Run them with `npm test` from the repository root ([#26](https://github.com/KEX-03/taskflow/pull/26)). Thanks to [@Venom-2006](https://github.com/Venom-2006)!
 - A browser tab icon (favicon) and home-screen icon, matching the TaskFlow logo in the sidebar.
 - The Dashboard greets users with "Good morning", "Good afternoon" or "Good evening" based on their local time, instead of always "Good morning" ([#29](https://github.com/KEX-03/taskflow/pull/29)). Thanks to [@s-sivaselvan](https://github.com/s-sivaselvan)!
+- Loading skeletons on the Tasks page: placeholder cards shaped like real tasks appear while tasks load, instead of a spinner ([#30](https://github.com/KEX-03/taskflow/pull/30)). Thanks to [@CreatorguyS](https://github.com/CreatorguyS)!
+- `npm run seed` creates a demo user (`demo@example.com`) with 8 sample tasks for local development. It refuses to run against a non-local database unless `--allow-remote` is given ([#31](https://github.com/KEX-03/taskflow/pull/31)). Thanks to [@CreatorguyS](https://github.com/CreatorguyS)!
+- An API reference ([`docs/API.md`](docs/API.md)) with example requests and real responses for every endpoint ([#32](https://github.com/KEX-03/taskflow/pull/32)). Thanks to [@CreatorguyS](https://github.com/CreatorguyS)!
 
 ### Fixed
 
 - Accessibility: every form label is now linked to its field (clicking a label focuses it, and screen readers announce it), and the icon-only buttons (Edit, Delete, dialog Close, sidebar Collapse/Expand) have descriptive names ([#23](https://github.com/KEX-03/taskflow/pull/23)). Thanks to [@manish-panwarr](https://github.com/manish-panwarr)!
 - Requesting, updating or deleting a task with an invalid id (like `/tasks/abc`) now returns 404 "Task not found." instead of a 500 error that exposed an internal database message ([#27](https://github.com/KEX-03/taskflow/pull/27)). Thanks to [@s-sivaselvan](https://github.com/s-sivaselvan)!
+
+### Security
+
+- Rate limiting on login and signup: each IP address gets 10 failed login attempts and 10 signup requests per 15 minutes, after which the API returns 429. Successful logins don't count toward the limit ([#33](https://github.com/KEX-03/taskflow/pull/33)). Thanks to [@Saifjafri212213](https://github.com/Saifjafri212213)!
 
 ## [1.0.0] - 2026-10-09
 
