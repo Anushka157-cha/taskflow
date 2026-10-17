@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 - Rate limiting on login and signup: each IP address gets 10 failed login attempts and 10 signup requests per 15 minutes, after which the API returns 429. Successful logins don't count toward the limit ([#33](https://github.com/KEX-03/taskflow/pull/33)). Thanks to [@Saifjafri212213](https://github.com/Saifjafri212213)!
+- Signup and password changes now use the same password rules in the app and on the server: at least 12 characters, with an uppercase letter, a lowercase letter, a number and a special character, and no spaces at the start or end. Previously the server accepted 6-character passwords, and the Profile page only checked the length. Existing passwords still work for logging in ([#35](https://github.com/KEX-03/taskflow/pull/35)). Thanks to [@Arya-AV](https://github.com/Arya-AV)!
 
 ## [1.0.0] - 2026-10-09
 

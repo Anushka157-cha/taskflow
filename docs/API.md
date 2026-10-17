@@ -48,7 +48,7 @@ Validation errors also include an `errors` array with each failing rule (for exa
 ```json
 {
   "success": false,
-  "message": "Validation failed",
+  "message": "Password must be at least 12 characters.",
   "errors": [
     "Password must be at least 12 characters.",
     "Password must contain at least one uppercase letter.",
