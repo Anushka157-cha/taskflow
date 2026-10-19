@@ -4,7 +4,6 @@ import { useToast } from "../components/Shared/Toast.jsx";
 import TaskSkeleton from "../components/Shared/TaskSkeleton.jsx";
 
 // ── Modal Component ───────────────────────
-
 const Modal = ({ open, onClose, title, children }) => {
   const titleId = useId();
 
@@ -28,35 +27,17 @@ const Modal = ({ open, onClose, title, children }) => {
 
   return (
     <div className="fixed inset-0 z-40 flex items-center justify-center px-4">
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-xs"
-        onClick={onClose}
-      />
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={titleId}
-        className="relative bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md shadow-2xl animate-slide-up"
-      >
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-xs" onClick={onClose} />
+      <div role="dialog" aria-modal="true" aria-labelledby={titleId} className="relative bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md shadow-2xl animate-slide-up">
         <div className="flex items-center justify-between p-5 border-b border-slate-800">
-          <h3 id={titleId} className="text-base font-semibold text-white">
-            {title}
-          </h3>
-          <button
-            type="button"
-            aria-label="Close dialog"
-            onClick={onClose}
-            className="text-slate-500 hover:text-white transition-colors text-xl leading-none"
-          >
-            ×
-          </button>
+          <h3 id={titleId} className="text-base font-semibold text-white">{title}</h3>
+          <button type="button" aria-label="Close dialog" onClick={onClose} className="text-slate-500 hover:text-white transition-colors text-xl leading-none">×</button>
         </div>
         <div className="p-5">{children}</div>
       </div>
     </div>
   );
 };
-
 
 // ── Task Form inside modal ─────────────────
 const TaskForm = ({ initial = {}, onSave, onClose }) => {
