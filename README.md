@@ -177,6 +177,8 @@ Contributions of all sizes are welcome, especially from **first-time contributor
 
 Please follow our [Code of Conduct](CODE_OF_CONDUCT.md). Found a security problem? See [SECURITY.md](SECURITY.md). Changes are listed in the [changelog](CHANGELOG.md).
 
+If TaskFlow helped you learn something or you enjoyed contributing, a ⭐ on the repo helps other first-time contributors find it.
+
 ## License
 
 [MIT](LICENSE) © 2026 KEX-03
