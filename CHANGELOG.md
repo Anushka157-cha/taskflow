@@ -9,10 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Approved pull requests are merged automatically: when the maintainer approves a PR, a GitHub Actions workflow squash-merges it as soon as the tests and the build pass, with a commit message built from the PR title, its description and the issues it closes.
+- A character counter under the Bio field on the Profile page ("120 / 300"), which turns amber from 280 characters. The field now stops at the 300-character limit instead of the save failing ([#54](https://github.com/KEX-03/taskflow/pull/54)). Thanks to [@SwatiManjari](https://github.com/SwatiManjari)!
+- Approved pull requests are merged automatically: when the maintainer approves a PR, a GitHub Actions workflow squash-merges it as soon as the tests and the build pass, with a commit message built from the PR title, its description and the issues it closes ([#53](https://github.com/KEX-03/taskflow/pull/53), [#55](https://github.com/KEX-03/taskflow/pull/55)).
 
 ### Changed
 
+- The README's demo GIF shows the current app.
 - The README, contributing guide and pull request template explain that approved pull requests are merged automatically, and that the pull request's title and "What does this PR do?" section become the commit on `main`.
 
 ### Fixed
