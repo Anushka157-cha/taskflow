@@ -173,7 +173,7 @@ TaskFlow runs on free plans of MongoDB Atlas, Render and Vercel. The [deployment
 
 Contributions of all sizes are welcome, especially from **first-time contributors**! 🎉
 
-1. Pick an issue labelled [**good first issue**](https://github.com/KEX-03/taskflow/labels/good%20first%20issue) and comment that you'd like to work on it.
+1. Pick an issue labelled [**good first issue**](https://github.com/KEX-03/taskflow/labels/good%20first%20issue) and comment that you'd like to work on it. These are reserved for people making their first few open-source contributions. If you've done several already, pick a [**help wanted**](https://github.com/KEX-03/taskflow/labels/help%20wanted) issue instead.
 2. Follow the [contributing guide](CONTRIBUTING.md): it covers setup, branches, commit messages, testing and opening a pull request, step by step.
 3. Give your pull request a [Conventional Commits](https://www.conventionalcommits.org) title and fill in "What does this PR do?": approved pull requests are merged automatically, and those become the commit on `main`.
 4. Questions? Ask in [Discussions](https://github.com/KEX-03/taskflow/discussions).
