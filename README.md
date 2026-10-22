@@ -111,6 +111,8 @@ This starts both parts together:
 | `npm run lint` | Check the code for likely bugs with ESLint |
 | `npm run seed` | Populate the database with a demo user and sample tasks (use `npm run seed -- --allow-remote` for remote databases) |
 
+**Running the tests:** the API tests need MongoDB running locally, the same as `npm run dev`. They use a separate `taskflow_test` database and delete it when they finish, so your own data is never touched.
+
 **Something not working?** The server prints a `❌` message explaining what's wrong, for example a missing setting or MongoDB not running.
 
 ## Project structure
@@ -119,13 +121,15 @@ This starts both parts together:
 taskflow/
 ├── server/                  Express REST API
 │   ├── src/
-│   │   ├── app.js           Entry point: middleware, routes and startup
+│   │   ├── server.js        Entry point: connects to MongoDB and starts the server
+│   │   ├── app.js           The Express app: middleware and routes
 │   │   ├── config/          MongoDB connection
 │   │   ├── models/          Mongoose schemas (User, Task)
 │   │   ├── controllers/     Request handlers: the logic for each endpoint
 │   │   ├── routes/          Maps URLs to controllers
 │   │   ├── middleware/      `protect`: checks the login token
 │   │   └── utils/           Helpers for tokens, errors and query parsing
+│   ├── test/                Automated tests for the helpers and the task API
 │   └── .env.example         Server settings, explained
 ├── client/                  React app (Vite)
 │   ├── src/

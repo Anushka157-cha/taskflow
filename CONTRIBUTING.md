@@ -152,9 +152,9 @@ git merge upstream/main
 
 ## 4. Test your change
 
-The backend has an automated test suite using Node.js's built-in test runner. It only covers part of the code so far, so please run the tests **and** check your change by hand before opening a pull request:
+The backend has an automated test suite using Node.js's built-in test runner. The API tests need MongoDB running locally, the same as `npm run dev`; they use a separate `taskflow_test` database, so your own data is safe. The tests only cover part of the code so far, so please run them **and** check your change by hand before opening a pull request:
 
-1. **The tests and the linter pass.** `npm test` from the repository root (or from `server/`) ends with `ℹ fail 0`, and `npm run lint` reports no problems. If you changed a helper in `server/src/utils/`, add or update its tests in `server/test/`. Changes to the scripts in `.github/scripts/` need their tests there updated too.
+1. **The tests and the linter pass.** `npm test` from the repository root (or from `server/`) ends with `ℹ fail 0`, and `npm run lint` reports no problems. If you changed a helper in `server/src/utils/` or an API endpoint, add or update its tests in `server/test/`. Changes to the scripts in `.github/scripts/` need their tests there updated too.
 2. **It builds.** `npm run build` finishes with `✓ built in …`.
 3. **It starts cleanly.** `npm run dev` shows no errors in either the `[server]` or the `[client]` output.
 4. **Your change works.** Try the exact thing your issue describes, including edge cases (empty input, very long text, and so on).
@@ -200,13 +200,15 @@ For the bigger picture (how a request flows, how login works, and how the data i
 ```
 taskflow/
 ├── server/src/            Express API
-│   ├── app.js             Entry point: middleware, routes, startup
+│   ├── server.js          Entry point: connects to MongoDB, starts the server
+│   ├── app.js             The Express app: middleware, routes
 │   ├── config/db.js       MongoDB connection
 │   ├── models/            Mongoose schemas: User, Task
 │   ├── controllers/       Request handlers (the actual logic)
 │   ├── routes/            URL → controller mapping
 │   ├── middleware/auth.js `protect`: checks the login token
 │   └── utils/             Helpers: tokens, errors, query parsing
+├── server/test/           Automated tests (node:test)
 └── client/src/            React app
     ├── App.jsx            All page routes
     ├── pages/             One file per page
@@ -260,6 +262,8 @@ app.use("/api/v1/tasks", taskRoutes);
 ```
 
 **5. Try it:** log in through Postman (or `curl`), then call `GET http://localhost:5000/api/v1/tasks/stats` with the token. Also add the endpoint to `postman_collection.json` and to the API table in the README.
+
+**6. Add tests** (`server/test/tasks.test.js`): send real requests to the endpoint, like the existing tests do, and check the responses, including the error cases. Run `npm test` and check that it ends with `ℹ fail 0`.
 
 ### Adding a page to the client
 

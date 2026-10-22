@@ -14,6 +14,8 @@ The client and server only talk using **JSON over HTTP**, at URLs starting with 
 
 ## Request flow
 
+The server starts in [`server/src/server.js`](../server/src/server.js): it checks the required settings, connects to MongoDB and starts listening. The Express app itself lives in [`server/src/app.js`](../server/src/app.js), separately, so the automated tests can load it without starting a real server.
+
 Every request to the server passes through the same steps, in the order they're set up in [`server/src/app.js`](../server/src/app.js):
 
 ```mermaid
@@ -96,3 +98,7 @@ client/src/
 - **Styling** uses Tailwind CSS utility classes directly in the JSX. Theme colors and animations are defined in [`src/index.css`](../client/src/index.css).
 
 In production, the client is a static site on Vercel, and [`client/vercel.json`](../client/vercel.json) sends every URL to `index.html` so React Router can show the right page. See the [deployment guide](DEPLOYMENT.md) for how the three parts are hosted.
+
+## Automated tests
+
+The server's tests are in [`server/test/`](../server/test) and use Node's built-in test runner (`node --test`). There are unit tests for the helpers and integration tests for the task API, which send real HTTP requests to the app. The integration tests use a separate `taskflow_test` database on your local MongoDB and delete it when they finish.
