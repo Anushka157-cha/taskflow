@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Tasks can have an optional due date. The API accepts `"dueDate": "2026-10-31"` when creating or updating a task, `null` removes it, and anything else returns a 400 with a clear message. The app doesn't show due dates yet ([#90](https://github.com/KEX-03/taskflow/pull/90)). Thanks to [@maansi1004](https://github.com/maansi1004)!
+- Each page sets its own browser tab title, like "Tasks — TaskFlow", so open tabs and browser history are easy to tell apart ([#89](https://github.com/KEX-03/taskflow/pull/89)). Thanks to [@varunverma1361-create](https://github.com/varunverma1361-create)!
+- API tests for the task endpoints: creating, listing, searching, updating and deleting tasks, and checking that users can't see or change each other's tasks. They run against a separate `taskflow_test` database, so `npm test` now needs MongoDB running locally ([#88](https://github.com/KEX-03/taskflow/pull/88)). Thanks to [@rahulkumar128667-blip](https://github.com/rahulkumar128667-blip)!
+- Tasks can have up to 5 tags. The API accepts `tags` when creating or updating a task, stores them in lowercase without duplicates, and `GET /tasks?tag=work` lists only the tasks with that tag. The app doesn't show tags yet ([#86](https://github.com/KEX-03/taskflow/pull/86)). Thanks to [@bercedev](https://github.com/bercedev)!
 - ESLint checks the client and server code for likely bugs (unused variables, mistakes with React hooks). Run it with `npm run lint`, and CI runs it on every pull request ([#81](https://github.com/KEX-03/taskflow/pull/81)).
 - Automated tests for the scripts behind the release and merge automation, which `npm test` now runs alongside the backend tests ([#83](https://github.com/KEX-03/taskflow/pull/83)).
 - A character counter under the Bio field on the Profile page ("120 / 300"), which turns amber from 280 characters. The field now stops at the 300-character limit instead of the save failing ([#54](https://github.com/KEX-03/taskflow/pull/54)). Thanks to [@SwatiManjari](https://github.com/SwatiManjari)!

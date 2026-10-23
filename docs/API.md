@@ -74,6 +74,17 @@ A task has a `tags` list, which is `[]` unless tags were given.
 
 ---
 
+### Due dates
+
+A task has a `dueDate`, which is `null` unless a due date was given.
+
+- **Format:** send a date as `"YYYY-MM-DD"`, for example `"2026-10-31"`. It's stored as midnight UTC and returned as `"2026-10-31T00:00:00.000Z"`, so the first 10 characters are always the date that was sent.
+- **Create** (`POST /tasks`): `dueDate` is optional and defaults to `null`.
+- **Update** (`PUT /tasks/:id`): a date replaces the due date and `null` clears it. If the request leaves `dueDate` out, the task keeps its due date.
+- **Errors:** anything else, such as `"tomorrow"`, `"31/10/2026"` or a date that doesn't exist like `"2026-02-30"`, returns `400` with a message about `dueDate`. Nothing is saved.
+
+---
+
 ## Endpoints
 
 ### 1. Health Check
@@ -416,6 +427,7 @@ curl -X GET "http://localhost:5000/api/v1/tasks?status=in-progress&priority=high
       "priority": "high",
       "status": "in-progress",
       "tags": ["review"],
+      "dueDate": "2026-10-31T00:00:00.000Z",
       "owner": "670c5b369a421ef8841a0101",
       "createdAt": "2026-10-14T10:15:00.000Z",
       "updatedAt": "2026-10-14T10:15:00.000Z",
@@ -445,7 +457,8 @@ Creates a new task associated with the authenticated user.
   - `priority` (string, optional): `"low"`, `"medium"`, or `"high"`. Defaults to `"medium"`.
   - `status` (string, optional): `"todo"`, `"in-progress"`, or `"done"`. Defaults to `"todo"`.
   - `tags` (array of strings, optional): Up to 5 tags of 1–20 characters each. Tags are trimmed, stored in lowercase, and duplicates are removed (`["Work", "work "]` is saved as `["work"]`). Defaults to `[]`.
- - `dueDate` (string or null, optional): Due date in YYYY-MM-DD format (for example, "2026-10-31"). Defaults to null when omitted. Invalid dates or formats return 400 Bad Request.
+  - `dueDate` (string or null, optional): A date in `YYYY-MM-DD` format, for example `"2026-10-31"`. Defaults to `null`. See [Due dates](#due-dates).
+
 #### Example Request
 ```bash
 curl -X POST http://localhost:5000/api/v1/tasks \
@@ -457,7 +470,7 @@ curl -X POST http://localhost:5000/api/v1/tasks \
     "priority": "high",
     "status": "todo",
     "tags": ["Testing", "backend"],
-     "dueDate": "2026-10-31"
+    "dueDate": "2026-10-31"
   }'
 ```
 
@@ -472,6 +485,7 @@ curl -X POST http://localhost:5000/api/v1/tasks \
     "priority": "high",
     "status": "todo",
     "tags": ["testing", "backend"],
+    "dueDate": "2026-10-31T00:00:00.000Z",
     "owner": "670c5b369a421ef8841a0101",
     "createdAt": "2026-10-14T10:15:00.000Z",
     "updatedAt": "2026-10-14T10:15:00.000Z",
@@ -493,6 +507,13 @@ curl -X POST http://localhost:5000/api/v1/tasks \
   {
     "success": false,
     "message": "A task can have at most 5 tags."
+  }
+  ```
+- **400 Bad Request** - Invalid due date (not `YYYY-MM-DD` or `null`):
+  ```json
+  {
+    "success": false,
+    "message": "Invalid dueDate. Use YYYY-MM-DD or null."
   }
   ```
 
@@ -522,6 +543,7 @@ curl -X GET http://localhost:5000/api/v1/tasks/670c5c189a421ef8841a0105 \
     "priority": "high",
     "status": "todo",
     "tags": ["testing", "backend"],
+    "dueDate": "2026-10-31T00:00:00.000Z",
     "owner": "670c5b369a421ef8841a0101",
     "createdAt": "2026-10-14T10:15:00.000Z",
     "updatedAt": "2026-10-14T10:15:00.000Z",
@@ -553,7 +575,7 @@ Updates one or more fields of an existing task.
   - `priority` (string): `"low"`, `"medium"`, or `"high"`.
   - `status` (string): `"todo"`, `"in-progress"`, or `"done"`.
   - `tags` (array of strings): Replaces the task's tags, with the same rules as on create. `[]` removes them all. Leave it out to keep the current tags. See [Tags](#tags).
- - `dueDate ` (string or null): Due date in YYYY-MM-DD format (for example, "2026-10-31"). Set it to null to clear the due date. Leave it out to keep the current due date. Invalid dates or formats return 400 Bad Request.
+  - `dueDate` (string or null): A date in `YYYY-MM-DD` format, or `null` to remove the due date. Leave it out to keep the current due date. See [Due dates](#due-dates).
 
 #### Example Request
 ```bash
@@ -565,11 +587,14 @@ curl -X PUT http://localhost:5000/api/v1/tasks/670c5c189a421ef8841a0105 \
     "dueDate": "2026-10-31"
   }'
 ```
-#### Example: Clear the Due Date
 
+To remove the due date, send `null`:
+```json
 {
   "dueDate": null
 }
+```
+
 #### Success Response (200 OK)
 ```json
 {
@@ -581,6 +606,7 @@ curl -X PUT http://localhost:5000/api/v1/tasks/670c5c189a421ef8841a0105 \
     "priority": "high",
     "status": "done",
     "tags": ["testing", "backend"],
+    "dueDate": "2026-10-31T00:00:00.000Z",
     "owner": "670c5b369a421ef8841a0101",
     "createdAt": "2026-10-14T10:15:00.000Z",
     "updatedAt": "2026-10-14T10:20:00.000Z",
@@ -609,6 +635,13 @@ curl -X PUT http://localhost:5000/api/v1/tasks/670c5c189a421ef8841a0105 \
   {
     "success": false,
     "message": "Invalid status."
+  }
+  ```
+- **400 Bad Request** - Invalid due date:
+  ```json
+  {
+    "success": false,
+    "message": "Invalid dueDate. Use YYYY-MM-DD or null."
   }
   ```
 - **404 Not Found** - Task ID not found:

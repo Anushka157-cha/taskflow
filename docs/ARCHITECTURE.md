@@ -65,8 +65,10 @@ Two collections, defined in [`server/src/models/`](../server/src/models):
 | `email` | string, unique, stored lowercase | `description` | string, up to 1000 characters |
 | `password` | bcrypt hash, **never sent to the client** | `priority` | `low`, `medium` (default) or `high` |
 | `bio` | string, up to 300 characters | `status` | `todo` (default), `in-progress` or `done` |
-| `avatar` | image URL (optional) | `owner` | id of the **User** who created it |
-| `createdAt`, `updatedAt` | added automatically | `createdAt`, `updatedAt` | added automatically |
+| `avatar` | image URL (optional) | `tags` | up to 5 lowercase tags, `[]` by default |
+| `createdAt`, `updatedAt` | added automatically | `dueDate` | a date, or `null` (default) for none |
+| | | `owner` | id of the **User** who created it |
+| | | `createdAt`, `updatedAt` | added automatically |
 
 **Ownership:** each task belongs to exactly one user through `owner`. Every task query in the controller includes `owner: req.user._id`, so **users can only see and change their own tasks**. Asking for someone else's task returns **404**, the same as a task that doesn't exist, so nobody can find out which task ids are in use. An index on `owner` + `createdAt` keeps "my newest tasks" queries fast.
 

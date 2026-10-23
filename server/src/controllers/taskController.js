@@ -3,6 +3,9 @@ const Task = require("../models/Task");
 const { PRIORITIES, STATUSES } = Task;
 const { getQueryString, escapeRegex, parsePositiveInt } = require("../utils/query");
 const { normalizeTags } = require("../utils/tags");
+
+const MAX_SEARCH_LENGTH = 100;
+
 // Validate due dates in YYYY-MM-DD format, allowing null to clear the date
 const parseDueDate = (value) => {
   if (value === null) {
@@ -24,7 +27,6 @@ const parseDueDate = (value) => {
 
   return { dueDate: date };
 };
-const MAX_SEARCH_LENGTH = 100;
 
 // Reusable helper to validate task IDs
 const isInvalidTaskId = (id) => !mongoose.isValidObjectId(id);
@@ -39,22 +41,17 @@ const sendTaskNotFound = (res) =>
 // ── POST /api/v1/tasks ───────────────────────
 const createTask = async (req, res) => {
   const { title, description, priority, status, tags, dueDate } = req.body;
-if (dueDate !== undefined) {
-  const dateResult = parseDueDate(dueDate);
 
-  if (dateResult.error) {
-    return res.status(400).json({
-      success: false,
-      message: dateResult.error,
-    });
-  }
-}
   if (!title || !title.trim()) {
     return res.status(400).json({ success: false, message: "Title is required." });
   }
   const tagResult = tags === undefined ? { tags: [] } : normalizeTags(tags);
   if (tagResult.error) {
     return res.status(400).json({ success: false, message: tagResult.error });
+  }
+  const dateResult = dueDate === undefined ? { dueDate: null } : parseDueDate(dueDate);
+  if (dateResult.error) {
+    return res.status(400).json({ success: false, message: dateResult.error });
   }
 
   const task = await Task.create({
@@ -63,7 +60,7 @@ if (dueDate !== undefined) {
     priority: priority || "medium",
     status: status || "todo",
     tags: tagResult.tags,
-    dueDate: dueDate === undefined ? null : parseDueDate(dueDate).dueDate,
+    dueDate: dateResult.dueDate,
     owner: req.user._id,
   });
 
@@ -140,7 +137,7 @@ const updateTask = async (req, res) => {
     return sendTaskNotFound(res);
   }
 
-  const { title, description, priority, status, tags,dueDate } = req.body;
+  const { title, description, priority, status, tags, dueDate } = req.body;
 
   if (title !== undefined) {
     if (!title.trim()) {
@@ -165,17 +162,10 @@ const updateTask = async (req, res) => {
     task.tags = tagResult.tags;
   }
   if (dueDate !== undefined) {
-  const dateResult = parseDueDate(dueDate);
-
-  if (dateResult.error) {
-    return res.status(400).json({
-      success: false,
-      message: dateResult.error,
-    });
+    const dateResult = parseDueDate(dueDate);
+    if (dateResult.error) return res.status(400).json({ success: false, message: dateResult.error });
+    task.dueDate = dateResult.dueDate;
   }
-
-  task.dueDate = dateResult.dueDate;
-}
 
   await task.save();
   res.json({ success: true, task });

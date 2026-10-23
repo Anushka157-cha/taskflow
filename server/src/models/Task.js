@@ -31,10 +31,11 @@ const taskSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
+    // A date (stored as midnight UTC), or null for no due date (checked in taskController.js)
     dueDate: {
-  type: Date,
-  default: null,
-},
+      type: Date,
+      default: null,
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
