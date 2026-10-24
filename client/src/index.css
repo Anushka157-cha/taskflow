@@ -31,7 +31,7 @@
   --color-emerald-600: #059669;
 
   /* Semantic tokens map UI roles to the current dark palette.
-    Future themes can change these mappings without editing components. */
+     Future themes can change these mappings without editing components. */
   --color-surface: var(--color-slate-950);
   --color-surface-raised: var(--color-slate-800);
   --color-surface-card: var(--color-slate-900);
@@ -44,7 +44,7 @@
   --color-text-label: var(--color-slate-300);
   --color-text-secondary: var(--color-slate-400);
   --color-text-muted: var(--color-slate-500);
-  
+
   --color-grid: var(--color-slate-850);
   --color-scrollbar: var(--color-slate-700);
   --color-scrollbar-hover: var(--color-slate-600);

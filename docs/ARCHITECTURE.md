@@ -97,7 +97,7 @@ client/src/
 - **Pages** own their data: each one calls the API through `utils/api.js` when it loads and keeps the results in its own state (`useState`). There's no global data store besides the logged-in user.
 - **Context** shares the logged-in user with every component through the `useAuth()` hook, and `useToast()` shows success and error messages.
 - **Validation** happens twice: `utils/validation.js` gives instant feedback in forms, but **the server is the source of truth** and checks everything again, because anyone can call the API directly.
-- **Styling** uses Tailwind CSS utility classes directly in the JSX. Theme colors and animations are defined in [`src/index.css`](../client/src/index.css).
+- **Styling** uses Tailwind CSS utility classes directly in the JSX. Theme colors and animations are defined in [`src/index.css`](../client/src/index.css). Backgrounds, borders and text use named colours (theme tokens) like `bg-surface-card`, `border-border-subtle` and `text-text-muted`, so a light theme can change them in one place. Use these instead of `slate-*` classes in new code; some pages still use `slate-*` until they're moved over.
 
 In production, the client is a static site on Vercel, and [`client/vercel.json`](../client/vercel.json) sends every URL to `index.html` so React Router can show the right page. See the [deployment guide](DEPLOYMENT.md) for how the three parts are hosted.
 

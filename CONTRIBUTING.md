@@ -290,7 +290,7 @@ const Archive = () => {
     <div className="flex-1 p-6 overflow-y-auto">
       <h1 className="text-xl font-bold text-white mb-6">Archive</h1>
       {tasks.map((task) => (
-        <p key={task._id} className="text-slate-300 text-sm">{task.title}</p>
+        <p key={task._id} className="text-text-label text-sm">{task.title}</p>
       ))}
     </div>
   );
