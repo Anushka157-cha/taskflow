@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Vercel preview deployments can log in: the optional `FRONTEND_ORIGIN_PATTERN` setting lets the API accept a pattern of frontend URLs as well as the exact ones in `FRONTEND_ORIGIN`. The server refuses to start if the pattern could match other websites. See [Preview deployments](docs/DEPLOYMENT.md#4-connect-the-api-to-the-frontend-cors).
 - Tasks can have an optional due date. The API accepts `"dueDate": "2026-10-31"` when creating or updating a task, `null` removes it, and anything else returns a 400 with a clear message. The app doesn't show due dates yet ([#90](https://github.com/KEX-03/taskflow/pull/90)). Thanks to [@maansi1004](https://github.com/maansi1004)!
 - Each page sets its own browser tab title, like "Tasks — TaskFlow", so open tabs and browser history are easy to tell apart ([#89](https://github.com/KEX-03/taskflow/pull/89)). Thanks to [@varunverma1361-create](https://github.com/varunverma1361-create)!
 - API tests for the task endpoints: creating, listing, searching, updating and deleting tasks, and checking that users can't see or change each other's tasks. They run against a separate `taskflow_test` database, so `npm test` now needs MongoDB running locally ([#88](https://github.com/KEX-03/taskflow/pull/88)). Thanks to [@rahulkumar128667-blip](https://github.com/rahulkumar128667-blip)!
